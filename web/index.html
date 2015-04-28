@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Elokuvakirjasto</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elokuvakirjasto</title>
+</head>
+<body>
+  <h1>!IMDB</h1>
 
-    <!-- Hyödyllisiä kirjastoja -->
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
-    <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+  <div ng-app="MovieApp">
+    <div ng-controller="MovieController">
+      <ul ng-repeat="movie in movies">
+        <li>{{movie.name}}</li>
+      </ul>
+      <div ng-controller="AddMovieController">
+        <form name="movieForm">
+          <p>
+            <label>Nimi</label>
+            <input name="nimi" type="text" ng-model="movie.name" required>
+            <div ng-show="movieForm.movie.name.$invalid && movieForm.movie.name.$dirty">
+              Kenttä ei saa olla tyhjä!
+            </div>
+          </p>
+          <p>
+            <label>Ohjaaja</label>
+            <input name="ohjaaja" type="text" ng-model="movie.director" required>
+            <div ng-show="movieForm.movie.director.$invalid && movieForm.movie.director.$dirty">
+              Kenttä ei saa olla tyhjä!
+            </div>
+          </p>  
+          <p>
+            <label>Julkaisuvuosi</label>
+            <input name="year" type="text" ng-model="movie.year" required>
+            <div ng-show="movieForm.movie.year.$invalid && movieForm.movie.year.$dirty">
+              Kenttä ei saa olla tyhjä!
+            </div>
+          </p>  
+          <p>
+            <label>Kuvaus</label>
+            <input name="description" type="text" ng-model="movie.description" required>
+            <div ng-show="movieForm.movie.description.$invalid && movieForm.movie.description.$dirty">
+              Kenttä ei saa olla tyhjä!
+            </div>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
-    <script src="app/app.js"></script>    
-  </body>
+
+  <!-- Hyödyllisiä kirjastoja -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+
+  <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
+  <script src="app/app.js"></script>  
+  <script src="app/controllers/movie_controller.js"></script>  
+  <script src="app/services/movie_service.js"></script>  
+  <script src=""></script>  
+  <script src=""></script>  
+  <script src=""></script>  
+</body>
 </html>
