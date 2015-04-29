@@ -21,7 +21,7 @@ MovieApp.controller('AddMovieController', function($scope, MovieService, $locati
 	$scope.movieYear = '';
 
 	$location.path('/movies/');
-}
+};
 
 
 });

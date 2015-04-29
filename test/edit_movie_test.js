@@ -5,23 +5,58 @@ describe('Edit movie', function(){
 
 	beforeEach(function(){
   		// Lisää moduulisi nimi tähän
-  		module('MyAwesomeModule');
+  		module('MovieApp');
 
-  		FirebaseServiceMock = (function(){
-  			return {
-				// Toteuta FirebaseServicen mockatut metodit tähän
-			}
-		})();
+      FirebaseServiceMock = (function(){
+        var movies= [
+        {
+          name: 'Joku leffa',
+          director: 'Kalle Ilves',
+          year: 2015,
+          description: 'Mahtava leffa!'
+        }
+        ];
+        return {
+          getMovies: function(){
+            return movies;
+          },getMovie: function(key, done){
+            if(key == 'abc123'){
+              done({
+                name: 'Joku leffa',
+                director: 'Kalle Ilves',
+                year: 2015,
+                description: 'Mahtava leffa!'
+              });
+            }else{
+              done(null);
+            }
+          },
+          editMovie: function(movie){
+           for (var i = 0; i < movies.length; i++) {
+            if (movies[i].name === movie.name) {
+              movies[i].name = movie.name;
+              movies[i].director = movie.director;
+              movies[i].year = movie.year;
+              movies[i].description = movie.description;
+            }
 
-		RouteParamsMock = (function(){
-			return {
-				// Toteuta mockattu $routeParams-muuttuja tähän
-			}
-		});
 
-		// Lisää vakoilijat
-	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
-	    /*
+          }
+        }
+
+      };
+    })();
+
+    RouteParamsMock = (function(){
+      return {
+        id: 'abc123'
+      };
+    })();
+    spyOn(FirebaseServiceMock, 'getMovie').and.callThrough();
+    spyOn(FirebaseServiceMock, 'editMovie').and.callThrough();
+
+
+      /*
 	    editMovie: function(movie){
   					movieToEdit = movies.find(function(m){ return m.name = movie.name });
   					if(movieToEdit){
@@ -38,12 +73,12 @@ describe('Edit movie', function(){
     	inject(function($controller, $rootScope) {
     		scope = $rootScope.$new();
 	      // Muista vaihtaa oikea kontrollerin nimi!
-	      controller = $controller('MyAwesomeController', {
+	      controller = $controller('EditMovieController', {
 	      	$scope: scope,
-	      	FirebaseService: FirebaseServiceMock,
+	      	MovieService: FirebaseServiceMock,
 	      	$routeParams: RouteParamsMock
 	      });
-	  });
+     });
     });
 
   	/*
@@ -56,8 +91,13 @@ describe('Edit movie', function(){
   	* käyttämällä toBeCalled-oletusta.
   	*/
   	it('should fill the edit form with the current information about the movie', function(){
-  		expect(true).toBe(false);
-  	})
+  		expect(scope.movieName).toBe('Joku leffa');
+      expect(scope.movieDirector).toBe('Kalle Ilves');
+      expect(scope.movieYear).toBe(2015);
+      expect(scope.movieDesc).toBe('Mahtava leffa!');
+      expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
+
+    });
 
   	/* 
   	* Testaa, että käyttäjä pystyy muokkaamaan elokuvaa, jos tiedot ovat oikeat
@@ -65,8 +105,18 @@ describe('Edit movie', function(){
   	* käyttämällä toBeCalled-oletusta.
   	*/
   	it('should be able to edit a movie by its name, director, release date and description', function(){
-  		expect(true).toBe(false);
-  	});
+  		
+      scope.movieName = 'Joku leffa';
+      scope.movieDirector = 'moi';
+      scope.movieDesc = 'moi';
+      scope.movieYear = 'moi';
+      scope.addMovie();
+
+      expect(scope.movies[0].name).toBe('Joku leffa');
+      expect(scope.movies[0].director).toBe('moi');
+      expect(FirebaseServiceMock.editMovie).toHaveBeenCalled();
+      
+    });
 
 	/*
 	* Testaa, ettei käyttäjä pysty muokkaaman elokuvaa, jos tiedot eivät ole oikeat
@@ -74,6 +124,13 @@ describe('Edit movie', function(){
   	* käyttämällä not.toBeCalled-oletusta.
   	*/
   	it('should not be able to edit a movie if its name, director, release date or description is empty', function(){
-  		expect(true).toBe(false);
-  	});
+      scope.movieName = '';
+      scope.movieDirector = 'moi';
+      scope.movieDesc = '';
+      scope.movieYear = 'moi';
+      scope.addMovie();
+
+      expect(FirebaseServiceMock.editMovie).not.toHaveBeenCalled();
+      expect(scope.movies[0].director).toBe('Kalle Ilves');
+    });
   });

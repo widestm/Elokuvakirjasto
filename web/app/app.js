@@ -13,5 +13,13 @@ MovieApp.config(function($routeProvider){
 	.when('/movies/new', {
 		controller: 'AddMovieController',
 		templateUrl: 'app/views/movieForm.html'
+	})
+	.when('/movies/:id', {
+		controller: 'MovieController',
+		templateUrl: 'app/templates/movie.html'
+	})
+	.when('/movies/:id/edit', {
+		controller: 'EditMovieController',
+		templateUrl: 'app/views/movieForm.html'
 	});
 });

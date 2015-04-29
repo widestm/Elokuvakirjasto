@@ -17,7 +17,7 @@ describe('Add movie', function(){
   					return movies;
   				}
 
-  			}
+  			};
   		})();
 
 		// Lisää vakoilijat
@@ -31,7 +31,7 @@ describe('Add movie', function(){
 	      	$scope: scope,
 	      	MovieService: FirebaseServiceMock
 	      });
-	  });
+     });
     });
 
   	/*

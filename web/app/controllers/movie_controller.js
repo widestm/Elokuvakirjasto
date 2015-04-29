@@ -1,10 +1,13 @@
-MovieApp.controller('MovieController', function($scope, MovieService){
+MovieApp.controller('MovieController', function($scope, $location, $routeParams, MovieService){
 	$scope.movies = MovieService.getMovies();
-
+	MovieService.getMovie($routeParams.id, function(movie){
+		if (!movie) {
+			$location.path('/');
+		}
+		$scope.movie = movie;
+	});
 
 	$scope.removeMovie = function(movie){
 		MovieService.removeMovie(movie);
-	};
-	$scope.editMovie = function(movie){
 	};
 });

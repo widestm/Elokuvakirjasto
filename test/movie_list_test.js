@@ -28,15 +28,18 @@ describe('Movie list', function(){
   					return movies;
   				},
   				removeMovie: function(movie){
-  					movies.indexOf(movie)
+  					movies.indexOf(movie);
   					movies.splice(movies.indexOf(movie), 1);
   					//movies = movies.filter(function(m){ m.name == movie.name });  			
-  				}
-  			}
-  		})();
+  				},
+          getMovie: function(){
+            
+          }
+        };
+      })();
 
-  		spyOn(FirebaseServiceMock, 'getMovies').and.callThrough();
-  		spyOn(FirebaseServiceMock, 'removeMovie').and.callThrough();
+      spyOn(FirebaseServiceMock, 'getMovies').and.callThrough();
+      spyOn(FirebaseServiceMock, 'removeMovie').and.callThrough();
 
     	// Injektoi toteuttamasi kontrolleri tähän
     	inject(function($controller, $rootScope) {
@@ -58,8 +61,8 @@ describe('Movie list', function(){
   	* käyttämällä toBeCalled-oletusta.
   	*/ 
   	it('should list all movies from the Firebase', function(){
-  		expect(scope.movies[0].name).toBe('movie1')
-  		expect(scope.movies[1].name).toBe('movie2')
+  		expect(scope.movies[0].name).toBe('movie1');
+  		expect(scope.movies[1].name).toBe('movie2');
 
   		expect(scope.movies.length).toBe(2);
   		expect(FirebaseServiceMock.getMovies).toHaveBeenCalled();
