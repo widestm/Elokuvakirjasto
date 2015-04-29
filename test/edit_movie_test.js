@@ -3,12 +3,12 @@ describe('Edit movie', function(){
 
 	var FirebaseServiceMock, RouteParamsMock;
 
-  	beforeEach(function(){
+	beforeEach(function(){
   		// Lisää moduulisi nimi tähän
-    	module('MyAwesomeModule');
+  		module('MyAwesomeModule');
 
-    	FirebaseServiceMock = (function(){
-			return {
+  		FirebaseServiceMock = (function(){
+  			return {
 				// Toteuta FirebaseServicen mockatut metodit tähän
 			}
 		})();
@@ -21,18 +21,30 @@ describe('Edit movie', function(){
 
 		// Lisää vakoilijat
 	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
+	    /*
+	    editMovie: function(movie){
+  					movieToEdit = movies.find(function(m){ return m.name = movie.name });
+  					if(movieToEdit){
+  						movieToEdit.name = movie.name;
+  						movieToEdit.director = movie.director;
+  						movieToEdit.year = movie.year;
+  						movieToEdit.description =movie.description;
+  					}
+  				},
+  				*/
+
 
     	// Injektoi toteuttamasi kontrolleri tähän
-	    inject(function($controller, $rootScope) {
-	      scope = $rootScope.$new();
+    	inject(function($controller, $rootScope) {
+    		scope = $rootScope.$new();
 	      // Muista vaihtaa oikea kontrollerin nimi!
 	      controller = $controller('MyAwesomeController', {
-	        $scope: scope,
-	        FirebaseService: FirebaseServiceMock,
-	        $routeParams: RouteParamsMock
+	      	$scope: scope,
+	      	FirebaseService: FirebaseServiceMock,
+	      	$routeParams: RouteParamsMock
 	      });
-	    });
-  	});
+	  });
+    });
 
   	/*
   	* Testaa alla esitettyjä toimintoja kontrollerissasi
@@ -51,17 +63,17 @@ describe('Edit movie', function(){
   	* Testaa, että käyttäjä pystyy muokkaamaan elokuvaa, jos tiedot ovat oikeat
 	* Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota,
   	* käyttämällä toBeCalled-oletusta.
-	*/
-	it('should be able to edit a movie by its name, director, release date and description', function(){
-		expect(true).toBe(false);
-	});
+  	*/
+  	it('should be able to edit a movie by its name, director, release date and description', function(){
+  		expect(true).toBe(false);
+  	});
 
 	/*
 	* Testaa, ettei käyttäjä pysty muokkaaman elokuvaa, jos tiedot eivät ole oikeat
 	* Testaa myös, että Firebasea käyttävästä palvelusta ei kutsuta muokkaus-funktiota,
   	* käyttämällä not.toBeCalled-oletusta.
-	*/
-	it('should not be able to edit a movie if its name, director, release date or description is empty', function(){
-		expect(true).toBe(false);
-	});
-});
+  	*/
+  	it('should not be able to edit a movie if its name, director, release date or description is empty', function(){
+  		expect(true).toBe(false);
+  	});
+  });

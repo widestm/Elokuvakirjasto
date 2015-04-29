@@ -1,0 +1,33 @@
+<form name="movieForm">
+  <p>
+    <label>Nimi</label>
+    <input name="movieName" type="text" ng-model="movieName" required ng-minlength="1">
+    <div ng-show="movieForm.movieName.$invalid && movieForm.movieName.$dirty">
+      Kenttä ei saa olla tyhjä!
+    </div>
+  </p>
+  <p>
+    <label>Ohjaaja</label>
+    <input name="movieDirector" type="text" ng-model="movieDirector" required ng-minlength="1">
+    <div ng-show="movieForm.movieDirector.$invalid && movieForm.movieDirector.$dirty">
+      Kenttä ei saa olla tyhjä!
+    </div>
+  </p>  
+  <p>
+    <label>Julkaisuvuosi</label>
+    <input name="movieYear" type="text" ng-model="movieYear" required ng-minlength="1">
+    <div ng-show="movieForm.movieYear.$invalid && movieForm.movieYear.$dirty">
+      Kenttä ei saa olla tyhjä!
+    </div>
+  </p>  
+  <p>
+    <label>Kuvaus</label>
+    <input name="movieDesc" type="text" ng-model="movieDesc" required ng-minlength="1">
+    <div ng-show="movieForm.movieDesc.$invalid && movieForm.movieDesc.$dirty">
+      Kenttä ei saa olla tyhjä!
+    </div>
+  </p>
+  <p>
+    <input type="submit" value="Lähetä" ng-click="addMovie()" ng-disabled="movieForm.$invalid">
+  </p>
+</form>
