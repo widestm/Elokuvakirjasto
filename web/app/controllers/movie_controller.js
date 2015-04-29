@@ -1,9 +1,6 @@
 MovieApp.controller('MovieController', function($scope, $location, $routeParams, MovieService){
 	$scope.movies = MovieService.getMovies();
 	MovieService.getMovie($routeParams.id, function(movie){
-		if (!movie) {
-			$location.path('/');
-		}
 		$scope.movie = movie;
 	});
 

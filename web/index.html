@@ -6,13 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Elokuvakirjasto</title>
 </head>
-<body>
+<body ng-app="MovieApp">
   <h1>!IMDB</h1>
   <li><a href="#/">Etusivu</a></li>
   <li><a href="#/movies/">Elokuvat</a></li>
   <li><a href="#/movies/new">Uusi elokuva</a></li>
-
-  <div ng-app="MovieApp">
+  <li><a href="#/search">Etsi Omdbstä!</a></li>
+  
+  <div>
     <div ng-view></div>
   </div>
 
@@ -26,8 +27,8 @@
   <script src="app/controllers/movie_controller.js"></script>  
   <script src="app/controllers/add_movie_controller.js"></script>  
   <script src="app/controllers/edit_movie_controller.js"></script>
+  <script src="app/controllers/search_movie_controller.js"></script>  
   <script src="app/services/movie_service.js"></script>  
-  <script src=""></script>  
-  <script src=""></script>  
+  <script src="app/services/api_service.js"></script>  
 </body>
 </html>

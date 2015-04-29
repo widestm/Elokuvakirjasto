@@ -1,0 +1,17 @@
+ <div>
+ 	<form>
+ 		<input type="text" name="name" ng-model="searchName" placeholder="Nimi">
+ 		<input type="text" name="year" ng-model="searchYear" placeholder="Julkaisuvuosi">
+ 		<input type="submit" value="Etsi OMDB:stä" ng-click="findMovie()" ng-disabled="movieForm.$invalid">
+ 	</form>
+ </div>
+ <h2>{{notice}}</h2>
+ <ng-pluralize count="movies.length"
+ when="{'0': 'Hakutusanalla ei löytynyt mittään että :(',
+ 'one': 'Löytyi yksi elokuva!',
+ 'other': 'Löytyi {} elokuvaa!'}">
+</ng-pluralize>
+<ul ng-repeat="movie in movies">
+	<li><a ng-href="http://www.imdb.com/title/{{movie.imdbID}}">{{movie.Title}}</a></li>
+
+</ul>
